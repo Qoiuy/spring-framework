@@ -16,10 +16,15 @@
 
 package org.springframework.beans.factory.xml;
 
+import java.net.MalformedURLException;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.core.io.FileUrlResource;
 import org.springframework.core.io.Resource;
+
+
 
 /**
  * Convenience extension of {@link DefaultListableBeanFactory} that reads bean definitions
@@ -77,6 +82,11 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 	public XmlBeanFactory(Resource resource, BeanFactory parentBeanFactory) throws BeansException {
 		super(parentBeanFactory);
 		this.reader.loadBeanDefinitions(resource);
+	}
+
+	public static void main(String[] args) throws MalformedURLException {
+		new XmlBeanFactory(new FileUrlResource("/Users/lilac/workspace/soruce/spring-framework/spring-webmvc/src/test/resources/org/springframework/web/context/WEB-INF/applicationContext.xml"));
+		System.out.println("");
 	}
 
 }

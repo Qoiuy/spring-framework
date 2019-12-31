@@ -116,9 +116,13 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
 	/**
 	 * Register each bean definition within the given root {@code <beans/>} element.
+	 * 在给定的根<beans/>元素中注册每个bean定义。
 	 */
 	@SuppressWarnings("deprecation")  // for Environment.acceptsProfiles(String...)
 	protected void doRegisterBeanDefinitions(Element root) {
+		// 任何嵌套的<beans>元素都会在这个方法中引起递归。为了正确地传播和保留<beans>缺省-*属性，请跟踪当前(父)委托，它可能为空。
+		// 创建新的(子)委托，其中包含一个对父类的引用，以便进行回退，然后最终将this.delegate重置为其原始(父类)引用。
+		// 这种行为模拟了一堆委托，但实际上并不需要一个。
 		// Any nested <beans> elements will cause recursion in this method. In
 		// order to propagate and preserve <beans> default-* attributes correctly,
 		// keep track of the current (parent) delegate, which may be null. Create
@@ -133,6 +137,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 			if (StringUtils.hasText(profileSpec)) {
 				String[] specifiedProfiles = StringUtils.tokenizeToStringArray(
 						profileSpec, BeanDefinitionParserDelegate.MULTI_VALUE_ATTRIBUTE_DELIMITERS);
+				//我们不能使用profile .of(…)，因为XML配置不支持profile表达式。
 				// We cannot use Profiles.of(...) since profile expressions are not supported
 				// in XML config. See SPR-12458 for details.
 				if (!getReaderContext().getEnvironment().acceptsProfiles(specifiedProfiles)) {

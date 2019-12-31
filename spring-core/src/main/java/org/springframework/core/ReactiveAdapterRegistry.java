@@ -345,7 +345,8 @@ public class ReactiveAdapterRegistry {
 					ReactiveTypeDescriptor.singleOptionalValue(Deferred.class,
 							() -> CompletableDeferredKt.CompletableDeferred(null)),
 					source -> CoroutinesUtils.deferredToMono((Deferred<?>) source),
-					source -> CoroutinesUtils.monoToDeferred(Mono.from(source)));
+					source -> CoroutinesUtils.monoToDeferred(Mono.from(source)))
+			;
 
 			registry.registerReactiveType(
 					ReactiveTypeDescriptor.multiValue(kotlinx.coroutines.flow.Flow.class, kotlinx.coroutines.flow.FlowKt::emptyFlow),

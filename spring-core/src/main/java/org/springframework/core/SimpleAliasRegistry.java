@@ -151,8 +151,10 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	/**
 	 * Resolve all alias target names and aliases registered in this
 	 * factory, applying the given StringValueResolver to them.
+	 * 解析此工厂中注册的所有别名目标名和别名，并将给定的StringValueResolver应用于它们。
 	 * <p>The value resolver may for example resolve placeholders
 	 * in target bean names and even in alias names.
+	 * 例如，值解析器可以解析目标bean名称中的占位符，甚至别名中的占位符。
 	 * @param valueResolver the StringValueResolver to apply
 	 */
 	public void resolveAliases(StringValueResolver valueResolver) {
