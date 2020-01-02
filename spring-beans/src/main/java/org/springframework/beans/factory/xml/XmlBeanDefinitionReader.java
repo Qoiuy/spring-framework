@@ -334,7 +334,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
-				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
+				int count = doLoadBeanDefinitions(inputSource, encodedResource.getResource());
+				return count;
 			}
 			finally {
 				inputStream.close();

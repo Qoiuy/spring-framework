@@ -19,6 +19,7 @@ package org.springframework.beans.factory.xml;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
 
 /**
@@ -79,4 +80,12 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 		this.reader.loadBeanDefinitions(resource);
 	}
 
+	public static void main(String[] args) {
+
+		XmlBeanFactory factory = new XmlBeanFactory(new PathResource("/Users/lilac/workspace/soruce/spring-framework/spring-webmvc/out/test/resources/org/springframework/web/context/WEB-INF/context-addition.xml"));
+
+		Object o1 = factory.getBean("aca");
+		Object o = factory.getBean("listenerVeto");
+
+	}
 }
